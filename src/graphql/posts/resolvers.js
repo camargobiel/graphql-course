@@ -1,9 +1,6 @@
-import { verifyIfResponseIsValid } from '../../error-handler';
-
 const post = async (_, { id }, { getPosts }) => {
   const response = await getPosts('/' + id);
-  const post = await response.json();
-  return verifyIfResponseIsValid(post);
+  return response.json();
 };
 
 const posts = async (_, { input }, { getPosts }) => {
@@ -12,19 +9,12 @@ const posts = async (_, { input }, { getPosts }) => {
   return post.json();
 };
 
+const user = async ({ userId }, __, { getUsers }) => {
+  const response = await getUsers('/' + userId);
+  return response.json();
+};
+
 export const postResolvers = {
   Query: { post, posts },
-  Post: {
-    unixTimestamp: ({ createdAt }) => {
-      const date = new Date(createdAt).getTime() / 1000;
-      return Math.floor(date);
-    },
-  },
-  PostResult: {
-    __resolveType: (obj) => {
-      if (obj.statusCode) return 'PostNotFoundError';
-      if (obj.id) return 'Post';
-      return null;
-    },
-  },
+  Post: { user },
 };
