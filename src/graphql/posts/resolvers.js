@@ -9,9 +9,8 @@ const posts = async (_, { input }, { getPosts }) => {
   return post.json();
 };
 
-const user = async ({ userId }, __, { getUsers }) => {
-  const response = await getUsers('/' + userId);
-  return response.json();
+const user = async ({ userId }, __, { userDataLoader }) => {
+  return userDataLoader.load(userId);
 };
 
 export const postResolvers = {
