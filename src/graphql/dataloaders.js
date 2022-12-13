@@ -12,8 +12,8 @@ export const makeUserDataLoader = (getUsers) => {
 export const makePostDataLoader = (getPosts) => {
   return new DataLoader(async (ids) => {
     const urlQuery = ids.join('&userId=');
-    const response = await getPosts('?userId=' + urlQuery);
-    const posts = await response.json();
+    const posts = getPosts('?userId=' + urlQuery);
+
     return ids.map((id) => posts.filter((post) => post.userId === id));
   });
 };

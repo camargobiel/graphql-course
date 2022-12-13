@@ -27,6 +27,7 @@
     "node-fetch": "^3.3.0"
   },
   "devDependencies": {
+    "apollo-datasource-rest": "^3.7.0",
     "dotenv": "^16.0.3",
     "eslint": "^8.29.0",
     "eslint-config-prettier": "^8.5.0",
