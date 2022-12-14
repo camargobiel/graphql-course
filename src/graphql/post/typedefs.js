@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server';
+import { gql } from 'apollo-server-core';
 
 export const postTypeDefs = gql`
   extend type Query {
@@ -6,13 +6,16 @@ export const postTypeDefs = gql`
     posts(input: ApiFiltersInput): [Post!]!
   }
 
+  extend type Mutation {
+    createPost(id: ID!): Post!
+  }
+
   type Post {
     id: ID!
     title: String!
     body: String!
-    userId: String!
+    user: User!
     indexRef: Int!
     createdAt: String!
-    user: User!
   }
 `;
